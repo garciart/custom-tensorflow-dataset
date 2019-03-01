@@ -16,15 +16,16 @@ and open the template in the editor.
         <?php
         ?>
         <p>Enter text below:</p>
-        <textarea id="myText" rows="8" cols="80">
+	<!-- Old standard screen grid! What What? -->
+        <textarea id="myText" cols="80" rows="25">
 At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
         </textarea>
         <br>
-        <input type="button" value="Remove Stop Words" onclick="hello();"/>
-        <p>Enter an x-value: <input type="text" name="enter" class="enter" value="" id="yValue"/>
+        <input type="button" value="Remove Stop Words" onclick="removeStopWords();"/>
+        <p>Enter an x-value to get a y-value for a slope of 2: <input type="text" name="enter" class="enter" value="" id="yValue"/>
             <input type="button" value="Get y-Value" onclick="yInput();"/>
             <script type="text/javascript">
-                var lol = document.getElementById('yValue');
+                var yValue = document.getElementById('yValue');
                 function yInput() {
                     learnLinear(yValue.value);
                 }
