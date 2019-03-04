@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 3, 2019, 5:42:29 PM
+    Author     : Rob Garcia at rgarcia@rgprogramming.com
+*/
+
+body {
+    font-family: sans-serif;
+    width: 80%;
+    margin: auto;
+}
+table {
+    padding: 3px;
+    width: 100%;
+}
+
