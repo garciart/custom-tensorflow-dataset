@@ -29,3 +29,7 @@ async function learnLinear(y) {
             tf.tensor2d([y], [1, 1])
             );
 }
+
+async function processData() {
+    
+}

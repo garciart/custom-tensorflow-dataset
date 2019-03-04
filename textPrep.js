@@ -4,24 +4,62 @@
  * and open the template in the editor.
  */
 
+// Feature names
+const WORD_LIST = ['24', 'acquisition', 'angle', 'approach', 'assistance', 'astronaut', 'atmospheric', 'automated', 'cancelled', 'cascading', 'cassini', 'central processing unit', 'coarse', 'color', 'communications', 'component', 'computer', 'conferencing', 'configuration', 'connectivity', 'control', 'core', 'cpu', 'crew', 'customer', 'deliver', 'designed', 'email', 'encompassing', 'experiment', 'flight', 'font', 'hardware', 'hour', 'html', 'information', 'infrared', 'internet', 'LAN', 'landing', 'language', 'layout', 'major', 'management', 'maneuvering ', 'markup', 'measure', 'mode', 'module', 'network', 'one', 'operation', 'orbiter', 'organizational', 'page', 'position', 'presentation', 'provide', 'radiometer', 'ram', 'random access memory', 'relative', 'representative', 'saturn', 'section', 'segment', 'self', 'sensor', 'service', 'sheet', 'shuttle', 'simulator', 'solutions', 'sounder', 'space', 'spacecraft', 'spacelab', 'steering', 'stick', 'storage', 'stratosphere', 'stratospheric', 'style', 'sub', 'subsystem', 'sun', 'support', 'system', 'technology', 'telecommunications', 'temperature', 'three', 'titan', 'train', 'unit', 'user', 'voice', 'web'];
+
 async function textPrepController() {
     // Get the text
     var context = document.getElementById('myText').value;
+    // Remove stopwords and special characters and convert to a 2D array
     var contextArray = removeStopWords(context);
     var frequencyMap = getFrequency(contextArray);
     var sortedArray = convertToSortedArray(frequencyMap);
-    var results = "<hr><p>Results:</p><table><tr>";
-    var arrayMax = sortedArray[0][1];
+    var arrayMax = Math.max.apply(Math, sortedArray.map(function(m) {
+	return m[1];
+    }));
     // Setting minimum to zero allows all x's to be weighted
     var arrayMin = 0;
+    var results = "<hr><p>Results:</p><table><tr>";
     for (var i = 0; i < sortedArray.length; i++) {
+	
+	/*
+	 * REPLACE FREQUENCY WITH FEATURE SCALE
+	 */
+	
         var featureScaled = (sortedArray[i][1] - arrayMin) / (arrayMax - arrayMin);
         results += "<td>" + sortedArray[i][0] + "</td><td>" + featureScaled + "</td>";
         if(i % 3 === 0) results += "</tr><tr>";
-        // results += "\n" + sortedArray[i].name + "\t" + sortedArray[i].count;
     }
     results += "</tr></table>";
     document.getElementById('myTable').innerHTML = results;
+    // Resort by word
+    sortedArray = sort2EArray(sortedArray, 0, 'DESC');
+    var matchedArray = [];
+    var count = 0;
+
+    /*
+     * LEFT OFF HERE! NEED TO FIX CODE BELOW AND REPLACE FREQUENCY WITH FEATURE SCALE VALUE
+     */
+    
+    
+    for (var i = 0; i < WORD_LIST.length; i++) {
+	if(WORD_LIST[i].localeCompare(sortedArray[count][0])) {
+	    matchedArray.push(sortedArray[count][1]);
+	    count++;
+	}
+	else {
+	    matchedArray.push(0);
+	}
+    }
+
+    var dataResults = "<hr><p>Data Results:</p><table><tr>";
+    for (var i = 0; i < WORD_LIST.length; i++) {
+	dataResults += "<td>" + WORD_LIST[i] + "</td><td>" + matchedArray[i] + "</td>";
+        if(i % 3 === 0) dataResults += "</tr><tr>";
+    }
+    dataResults += "</tr></table>";
+
+    document.getElementById('myDataTable').innerHTML = dataResults;
 }
 
 function removeStopWords(context) {
@@ -43,7 +81,7 @@ function removeStopWords(context) {
 
 function getFrequency(contextArray) {
     var frequencyMap = {};
-    contextArray.forEach(function (key) {
+    contextArray.forEach(function(key) {
         if (frequencyMap.hasOwnProperty(key)) {
             frequencyMap[key]++;
         } else {
@@ -59,15 +97,31 @@ function convertToSortedArray(frequencyMap) {
     for (var key in frequencyMap) {
         sortedArray.push([key, frequencyMap[key]]);
     }
-
-    sortedArray.sort(function (a, b) {
-        // Sort by frequency in descending order. Change to a[0] and b[0] to sort by name
-        if (a[1] === b[1]) {
-            return 0;
-        } else {
-            return (a[1] > b[1]) ? -1 : 1;
-        }
-    });
+    sortedArray = sort2EArray(sortedArray, 1, 'ASC');
 
     return sortedArray;
+}
+
+function sort2EArray(arrayToSort, column, order) {
+    if(column < 0 || column > 1) {
+	Console.log("Error: Invalid column value.");
+    }
+    else {
+        arrayToSort.sort(function (a, b) {
+	    // Sort by frequency in descending order. Change to a[0] and b[0] to sort by name
+	    if (a[column] === b[column]) {
+		return 0;
+	    } else {
+		if(order === 'ASC') {
+		    return (a[column] > b[column]) ? -1 : 1;
+		}
+		else {
+		    return (a[column] > b[column]) ? 1 : -1;
+		}
+	    }
+	});
+    }
+    
+
+    return arrayToSort;
 }
