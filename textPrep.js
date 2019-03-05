@@ -1,7 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Summary. (use period)
+ *
+ * Description. (use period)
+ *
+ * @link   URL
+ * @file   This files defines the MyClass class.
+ * @author AuthorName.
+ * @since  x.x.x
  */
 
 // Feature names
@@ -21,41 +26,33 @@ async function textPrepController() {
     var arrayMin = 0;
     var results = "<hr><p>Results:</p><table><tr>";
     for (var i = 0; i < sortedArray.length; i++) {
-	
-	/*
-	 * REPLACE FREQUENCY WITH FEATURE SCALE
-	 */
-	
         var featureScaled = (sortedArray[i][1] - arrayMin) / (arrayMax - arrayMin);
-        results += "<td>" + sortedArray[i][0] + "</td><td>" + featureScaled + "</td>";
-        if(i % 3 === 0) results += "</tr><tr>";
+        results += "<td>" + sortedArray[i][0] + "</td><td>" + sortedArray[i][1] + "</td><td>(" + featureScaled + ")</td>";
+        sortedArray[i][1] = featureScaled;
+        if((i + 1) % 3 === 0) results += "</tr><tr>";
     }
     results += "</tr></table>";
     document.getElementById('myTable').innerHTML = results;
     // Resort by word
     sortedArray = sort2EArray(sortedArray, 0, 'DESC');
+    alert(sortedArray);
     var matchedArray = [];
     var count = 0;
-
-    /*
-     * LEFT OFF HERE! NEED TO FIX CODE BELOW AND REPLACE FREQUENCY WITH FEATURE SCALE VALUE
-     */
-    
-    
     for (var i = 0; i < WORD_LIST.length; i++) {
-	if(WORD_LIST[i].localeCompare(sortedArray[count][0])) {
-	    matchedArray.push(sortedArray[count][1]);
-	    count++;
-	}
-	else {
-	    matchedArray.push(0);
-	}
+        if (WORD_LIST[i] != sortedArray[count][0]) {
+            matchedArray.push('0.0');
+            count++;
+        }
+        else {
+            matchedArray.push(sortedArray[count][1]);
+        }
     }
+    alert(matchedArray);
 
     var dataResults = "<hr><p>Data Results:</p><table><tr>";
     for (var i = 0; i < WORD_LIST.length; i++) {
 	dataResults += "<td>" + WORD_LIST[i] + "</td><td>" + matchedArray[i] + "</td>";
-        if(i % 3 === 0) dataResults += "</tr><tr>";
+        if((i + 1) % 3 === 0) dataResults += "</tr><tr>";
     }
     dataResults += "</tr></table>";
 

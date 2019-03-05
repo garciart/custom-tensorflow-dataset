@@ -1,7 +1,12 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Summary. (use period)
+ *
+ * Description. (use period)
+ *
+ * @link   URL
+ * @file   This files defines the MyClass class.
+ * @author AuthorName.
+ * @since  x.x.x
  */
 
 // All comments are based on the information found at https://js.tensorflow.org/api or one of Laurence Moroney's excellent tutorials at Coding TensorFlow
@@ -28,8 +33,4 @@ async function learnLinear(y) {
     document.getElementById('output_field').innerText = model.predict(
             tf.tensor2d([y], [1, 1])
             );
-}
-
-async function processData() {
-    
 }
