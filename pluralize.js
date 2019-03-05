@@ -1,5 +1,5 @@
 /* 
- * This code is courtesy of the awesom Blake Embrey at https://github.com/blakeembrey/pluralize
+ * This code is courtesy of the awesome Blake Embrey at https://github.com/blakeembrey/pluralize
  */
 
 /* global define */

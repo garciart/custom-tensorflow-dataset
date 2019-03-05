@@ -111,7 +111,7 @@ function convertToTensors(data, targets, testSplit) {
  *     return test data above. Each element of the `Array` is from the set
  *     {0, 1, 2}.
  */
-export function getIrisData(testSplit) {
+export function getAcronymData(testSplit) {
     return tf.tidy(() => {
 	const dataByClass = [];
 	const targetsByClass = [];

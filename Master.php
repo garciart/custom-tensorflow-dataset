@@ -9,8 +9,8 @@
         <link rel="stylesheet" type="text/css" href="StyleSheet.css">
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"></script>
         <script type="text/javascript" src="textPrep.js"></script>
-        <script type="text/javascript" src="tensorFlow.js"></script>
 	<script type="text/javascript" src="pluralize.js"></script>
+	<script type="text/javascript" src="constants.js"></script>
         <!-- Content placeholder for head content -->
         <?php echo $contentPlaceHolder1; ?>
     </head>
