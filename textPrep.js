@@ -10,46 +10,68 @@
  */
 
 // Feature names
-const WORD_LIST = ['24', 'acquisition', 'angle', 'approach', 'assistance', 'astronaut', 'atmospheric', 'automated', 'cancelled', 'cascading', 'cassini', 'central processing unit', 'coarse', 'color', 'communications', 'component', 'computer', 'conferencing', 'configuration', 'connectivity', 'control', 'core', 'cpu', 'crew', 'customer', 'deliver', 'designed', 'email', 'encompassing', 'experiment', 'flight', 'font', 'hardware', 'hour', 'html', 'information', 'infrared', 'internet', 'LAN', 'landing', 'language', 'layout', 'major', 'management', 'maneuvering ', 'markup', 'measure', 'mode', 'module', 'network', 'one', 'operation', 'orbiter', 'organizational', 'page', 'position', 'presentation', 'provide', 'radiometer', 'ram', 'random access memory', 'relative', 'representative', 'saturn', 'section', 'segment', 'self', 'sensor', 'service', 'sheet', 'shuttle', 'simulator', 'solutions', 'sounder', 'space', 'spacecraft', 'spacelab', 'steering', 'stick', 'storage', 'stratosphere', 'stratospheric', 'style', 'sub', 'subsystem', 'sun', 'support', 'system', 'technology', 'telecommunications', 'temperature', 'three', 'titan', 'train', 'unit', 'user', 'voice', 'web'];
+const WORD_LIST = ['24', 'acquisition', 'angle', 'approach', 'assistance', 'astronaut', 'atmospheric', 'automated', 'canceled', 'cascading', 'cassini', 'central processing unit', 'coarse', 'color', 'communication', 'component', 'computer', 'conferencing', 'configuration', 'connectivity', 'control', 'core', 'cpu', 'crew', 'customer', 'deliver', 'designed', 'email', 'encompassing', 'experiment', 'flight', 'font', 'hardware', 'hour', 'html', 'information', 'infrared', 'internet', 'LAN', 'landing', 'language', 'layout', 'major', 'management', 'maneuvering ', 'markup', 'measure', 'mode', 'module', 'network', 'one', 'operation', 'orbiter', 'organizational', 'page', 'position', 'presentation', 'provide', 'radiometer', 'ram', 'random access memory', 'relative', 'representative', 'saturn', 'section', 'segment', 'self', 'sensor', 'service', 'sheet', 'shuttle', 'simulator', 'solution', 'sounder', 'space', 'spacecraft', 'spacelab', 'steering', 'stick', 'storage', 'stratosphere', 'stratospheric', 'style', 'sub', 'subsystem', 'sun', 'support', 'system', 'technology', 'telecommunication', 'temperature', 'three', 'titan', 'train', 'unit', 'user', 'voice', 'web'];
 
+/*
+ * 
+ */
 async function textPrepController() {
     // Get the text
     var context = document.getElementById('myText').value;
-    // Remove stopwords and special characters and convert to a 2D array
+    // Remove stopwords and special characters and convert to an array
     var contextArray = removeStopWords(context);
+    // Map out the frequency of each word
     var frequencyMap = getFrequency(contextArray);
+    // Convert to a 2D array and sort by occurence
     var sortedArray = convertToSortedArray(frequencyMap);
+    // Get the number of times the most frequent word appears
     var arrayMax = Math.max.apply(Math, sortedArray.map(function(m) {
 	return m[1];
     }));
-    // Setting minimum to zero allows all x's to be weighted
+    // Set the minimum to zero to allow all words in the text to be weighted
     var arrayMin = 0;
-    var results = "<hr><p>Results:</p><table><tr>";
+    // Prepare the HTML string
+    var results = "<hr><p>Breakdown by frequency:</p><table><tr>";
+    /*
+     * Add words to the table, sorted by frequency and in descending order
+     * Display the word, the frequency and the frequency scaled between 1 and 0
+     * Remember to replace the values of the frequency column with the scaled value 
+     */
     for (var i = 0; i < sortedArray.length; i++) {
+	// Scale the frequency value between 1 and 0
         var featureScaled = (sortedArray[i][1] - arrayMin) / (arrayMax - arrayMin);
-        results += "<td>" + sortedArray[i][0] + "</td><td>" + sortedArray[i][1] + "</td><td>(" + featureScaled + ")</td>";
+        // Add the three columns to the table
+	results += "<td>" + sortedArray[i][0] + "</td><td>" + sortedArray[i][1] + "</td><td>(" + featureScaled + ")</td>";
+	// Convert to singular using Blake Embrey's awesome pluralize.js at https://github.com/blakeembrey/pluralize
+	sortedArray[i][0] = pluralize.singular(sortedArray[i][0]);
+	// Replace the frequency value with the scaled value
         sortedArray[i][1] = featureScaled;
+	// Split the table into three columns
         if((i + 1) % 3 === 0) results += "</tr><tr>";
     }
+    // Close the table
     results += "</tr></table>";
+    // Send the HTML string to the view
     document.getElementById('myTable').innerHTML = results;
     // Resort by word
     sortedArray = sort2EArray(sortedArray, 0, 'DESC');
-    alert(sortedArray);
+
+    var textWordsArray = sortedArray.map(function(tuple) {
+	return tuple[0];
+    });
     var matchedArray = [];
     var count = 0;
     for (var i = 0; i < WORD_LIST.length; i++) {
-        if (WORD_LIST[i] != sortedArray[count][0]) {
-            matchedArray.push('0.0');
-            count++;
-        }
-        else {
-            matchedArray.push(sortedArray[count][1]);
-        }
+	var index = textWordsArray.indexOf(WORD_LIST[i]);
+	if (index == -1) {
+	    matchedArray.push(0.0);
+	}
+	else {
+	    matchedArray.push(sortedArray[index][1]);
+	}
     }
-    alert(matchedArray);
 
-    var dataResults = "<hr><p>Data Results:</p><table><tr>";
+    var dataResults = "<hr><p>Text matched to feature set:</p><table><tr>";
     for (var i = 0; i < WORD_LIST.length; i++) {
 	dataResults += "<td>" + WORD_LIST[i] + "</td><td>" + matchedArray[i] + "</td>";
         if((i + 1) % 3 === 0) dataResults += "</tr><tr>";

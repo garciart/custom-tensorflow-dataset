@@ -10,18 +10,17 @@
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"></script>
         <script type="text/javascript" src="textPrep.js"></script>
         <script type="text/javascript" src="tensorFlow.js"></script>
+	<script type="text/javascript" src="pluralize.js"></script>
         <!-- Content placeholder for head content -->
         <?php echo $contentPlaceHolder1; ?>
     </head>
     <body>
         <header>
-            <div style="clear:both; overflow:auto;">
-                <img src="sherpa_q2a_logo.png" alt="" style="float:left; height:100px;"/>
-                <h1>Welcome to Blue Harvest #1!</h1>                
-                <!-- Content placeholder for header element content -->
-                <?php echo $contentPlaceHolder2; ?>
-                <hr>
-            </div>
+	    <img id="sherpaLogo" src="sherpa_q2a_logo.png" alt="" style="float:left; height:100px;"/>
+	    <h1>Welcome to Blue Harvest #1!</h1>                
+	    <!-- Content placeholder for header element content -->
+	    <?php echo $contentPlaceHolder2; ?>
+	    <hr>
         </header>
         <main>
             <!-- Content placeholder for main element content -->

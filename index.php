@@ -35,6 +35,8 @@ NASA science is focused on better understanding Earth through the Earth Observin
 <br>
 <div id="myTable"></div>
 <br>
+<div id="myResort"></div>
+<br>
 <div id="myDataTable"></div>
 <?php
 /* Store the content of the buffer for later use */
