@@ -1,10 +1,9 @@
 /* 
- *  Created on : Mar 3, 2019, 5:42:29 PM
- *  Author     : Rob Garcia at rgarcia@rgprogramming.com
+ *  Author     : Rob Garcia at rgarcia@rgprogramming.com.
  */
 
 body {
-    font-family: sans-serif;
+    font-family: monospace;
     width: 80%;
     margin: auto;
 }
@@ -19,5 +18,8 @@ header {
     float:left;
     height:100px;
     padding-right: 12px;
+}
+.highlight {
+    background-color: yellow;
 }
 

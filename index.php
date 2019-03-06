@@ -1,10 +1,9 @@
 <?php
 /*
- *  Created on : Mar 3, 2019, 5:42:29 PM
- *  Author     : Rob Garcia at rgarcia@rgprogramming.com
+ *  Author     : Rob Garcia at rgarcia@rgprogramming.com.
+ *  Master Page code from https://github.com/garciart/Master-Pages-In-PHP
  */
 
-/* Master Page code from https://github.com/garciart/Master-Pages-In-PHP */
 /* Start placing content into an output buffer */
 ob_start();
 ?>
@@ -29,7 +28,7 @@ ob_clean();
 <!-- Main Element Content -->
 <p>1. Enter text below:</p>
 <textarea id="myText" rows="25" style="width:100%;">
-The National Aeronautics and Space Administration (NASA) is an independent agency of the United States Federal Government responsible for the civilian space program, as well as aeronautics and aerospace research.
+The National Aeronautics and Space Administration (N.A.S.A.) is an independent agency of the United States Federal Government responsible for the civilian space program, as well as aeronautics and aerospace research.
 
 NASA was established in 1958, succeeding the National Advisory Committee for Aeronautics (NACA). The new agency was to have a distinctly civilian orientation, encouraging peaceful applications in space science. Since its establishment, most US space exploration efforts have been led by NASA, including the Apollo Moon landing missions, the Skylab space station, and later the Space Shuttle. NASA is supporting the International Space Station and is overseeing the development of the Orion Multi-Purpose Crew Vehicle, the Space Launch System and Commercial Crew vehicles. The agency is also responsible for the Launch Services Program which provides oversight of launch operations and countdown management for unmanned NASA launches.
 
@@ -40,7 +39,12 @@ NASA science is focused on better understanding Earth through the Earth Observin
 <div id="frequencyTable"></div>
 <br>
 <div id="dataSetTable"></div>
-<script>getAcronymData(.0);</script>
+<br>
+<div id="weightsList"></div>
+<br>
+<div id="theSplit"></div>
+<br>
+<div id="confidenceList"></div>
 <?php
 /* Store the content of the buffer for later use */
 $contentPlaceHolder3 = ob_get_contents();

@@ -1,7 +1,6 @@
 <?php
 /*
- *  Created on : Mar 3, 2019, 5:42:29 PM
- *  Author     : Rob Garcia at rgarcia@rgprogramming.com
+ *  Author     : Rob Garcia at rgarcia@rgprogramming.com.
  */
 ?>
 <!DOCTYPE html>
@@ -14,7 +13,8 @@
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
         <script type="text/javascript" src="textPrep.js"></script>
         <script type="text/javascript" src="pluralize.js"></script>
-        <script type="text/javascript" src="trainingData.js"></script>
+	<script type="text/javascript" src="data.js"></script>
+        <script type="text/javascript" src="dataProcessing.js"></script>
         <!-- Content placeholder for head content -->
         <?php echo $contentPlaceHolder1; ?>
     </head>

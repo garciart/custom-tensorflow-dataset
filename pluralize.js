@@ -1,14 +1,10 @@
 /**
- * Summary. (use period)
+ * Summary. Used to convert all words to singular case.
  *
- * Description. (use period)
+ * Description. This code is courtesy of the awesome Blake Embrey at https://github.com/blakeembrey/pluralize
  *
- * @link   URL
- * @file   This files defines the MyClass class.
- * @author AuthorName.
- * @since  x.x.x
- *
- * This code is courtesy of the awesome Blake Embrey at https://github.com/blakeembrey/pluralize
+ * @link   https://github.com/blakeembrey/pluralize
+ * @author Blake Embrey.
  */
 
 /* global define */

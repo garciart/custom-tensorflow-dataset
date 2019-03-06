@@ -1,15 +1,12 @@
 /**
- * Summary. (use period)
+ * Summary. My First TensorFlow.js tutorial.
  *
- * Description. (use period)
+ * Description. All comments are based on the information found at https://js.tensorflow.org/api or one of Laurence Moroney's excellent tutorials at Coding TensorFlow.
  *
- * @link   URL
- * @file   This files defines the MyClass class.
- * @author AuthorName.
- * @since  x.x.x
+ * @link   https://www.youtube.com/watch?v=pbCExciEbrc&list=PLQY2H8rRoyvwLbzbnKJ59NkZvQAW9wLbx&index=21&t=0s
+ * @author Laurence Moroney.
  */
 
-// All comments are based on the information found at https://js.tensorflow.org/api or one of Laurence Moroney's excellent tutorials at Coding TensorFlow
 async function learnLinear(y) {
     // A sequential model is any model where the outputs of one layer are the inputs to the next layer, i.e. the model topology is a simple 'stack' of layers, with no branching or skipping
     const model = tf.sequential();
