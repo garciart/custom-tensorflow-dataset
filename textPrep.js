@@ -1,3 +1,5 @@
+/* global pluralize, FEATURE_LIST, Console */
+
 /**
  * Summary. (use period)
  *
@@ -9,12 +11,6 @@
  * @since  x.x.x
  */
 
-// Feature names
-// const WORD_LIST = ['24', 'acquisition', 'angle', 'approach', 'assistance', 'astronaut', 'atmospheric', 'automated', 'canceled', 'cascading', 'cassini', 'central processing unit', 'coarse', 'color', 'communication', 'component', 'computer', 'conferencing', 'configuration', 'connectivity', 'control', 'core', 'cpu', 'crew', 'customer', 'deliver', 'designed', 'email', 'encompassing', 'experiment', 'flight', 'font', 'hardware', 'hour', 'html', 'information', 'infrared', 'internet', 'LAN', 'landing', 'language', 'layout', 'major', 'management', 'maneuvering ', 'markup', 'measure', 'mode', 'module', 'network', 'one', 'operation', 'orbiter', 'organizational', 'page', 'position', 'presentation', 'provide', 'radiometer', 'ram', 'random access memory', 'relative', 'representative', 'saturn', 'section', 'segment', 'self', 'sensor', 'service', 'sheet', 'shuttle', 'simulator', 'solution', 'sounder', 'space', 'spacecraft', 'spacelab', 'steering', 'stick', 'storage', 'stratosphere', 'stratospheric', 'style', 'sub', 'subsystem', 'sun', 'support', 'system', 'technology', 'telecommunication', 'temperature', 'three', 'titan', 'train', 'unit', 'user', 'voice', 'web'];
-
-/*
- * 
- */
 async function textPrepController() {
     // Get the text
     var context = document.getElementById('myText').value;
@@ -31,7 +27,7 @@ async function textPrepController() {
     // Set the minimum to zero to allow all words in the text to be weighted
     var arrayMin = 0;
     // Prepare the HTML string
-    var results = "<hr><p>Breakdown by frequency:</p><table><tr>";
+    var results = "<hr><p>2. Breakdown of text by frequency:</p><table><tr>";
     /*
      * Add words to the table, sorted by frequency and in descending order
      * Display the word, the frequency and the frequency scaled between 1 and 0
@@ -52,7 +48,7 @@ async function textPrepController() {
     // Close the table
     results += "</tr></table>";
     // Send the HTML string to the view
-    document.getElementById('myTable').innerHTML = results;
+    document.getElementById('frequencyTable').innerHTML = results;
     // Resort by word
     sortedArray = sort2EArray(sortedArray, 0, 'DESC');
 
@@ -60,10 +56,10 @@ async function textPrepController() {
 	return tuple[0];
     });
     var matchedArray = [];
-    var count = 0;
-    for (var i = 0; i < WORD_LIST.length; i++) {
-	var index = textWordsArray.indexOf(WORD_LIST[i]);
-	if (index == -1) {
+
+    for (var i = 0; i < FEATURE_LIST.length; i++) {
+	var index = textWordsArray.indexOf(FEATURE_LIST[i]);
+	if (index === -1) {
 	    matchedArray.push(0.0);
 	}
 	else {
@@ -71,14 +67,14 @@ async function textPrepController() {
 	}
     }
 
-    var dataResults = "<hr><p>Text matched to feature set:</p><table><tr>";
-    for (var i = 0; i < WORD_LIST.length; i++) {
-	dataResults += "<td>" + WORD_LIST[i] + "</td><td>" + matchedArray[i] + "</td>";
+    var dataResults = "<hr><p>3. Data set and weights:</p><table><tr>";
+    for (var i = 0; i < FEATURE_LIST.length; i++) {
+	dataResults += "<td>" + FEATURE_LIST[i] + "</td><td>" + matchedArray[i] + "</td>";
         if((i + 1) % 3 === 0) dataResults += "</tr><tr>";
     }
     dataResults += "</tr></table>";
 
-    document.getElementById('myDataTable').innerHTML = dataResults;
+    document.getElementById('dataSetTable').innerHTML = dataResults;
 }
 
 function removeStopWords(context) {

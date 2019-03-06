@@ -1,5 +1,10 @@
 <?php
-/* Source: https://github.com/garciart/Master-Pages-In-PHP */
+/*
+ *  Created on : Mar 3, 2019, 5:42:29 PM
+ *  Author     : Rob Garcia at rgarcia@rgprogramming.com
+ */
+
+/* Master Page code from https://github.com/garciart/Master-Pages-In-PHP */
 /* Start placing content into an output buffer */
 ob_start();
 ?>
@@ -22,8 +27,7 @@ $contentPlaceHolder2 = ob_get_contents();
 ob_clean();
 ?>
 <!-- Main Element Content -->
-<p>Enter text below:</p>
-<!-- Old standard screen grid! What What? -->
+<p>1. Enter text below:</p>
 <textarea id="myText" rows="25" style="width:100%;">
 The National Aeronautics and Space Administration (NASA) is an independent agency of the United States Federal Government responsible for the civilian space program, as well as aeronautics and aerospace research.
 
@@ -33,11 +37,10 @@ NASA science is focused on better understanding Earth through the Earth Observin
 </textarea>
 <input type="button" value="Process text" onclick="textPrepController();"/>
 <br>
-<div id="myTable"></div>
+<div id="frequencyTable"></div>
 <br>
-<div id="myResort"></div>
-<br>
-<div id="myDataTable"></div>
+<div id="dataSetTable"></div>
+<script>getAcronymData(.0);</script>
 <?php
 /* Store the content of the buffer for later use */
 $contentPlaceHolder3 = ob_get_contents();
