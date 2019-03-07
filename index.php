@@ -42,7 +42,7 @@ NASA science is focused on better understanding Earth through the Earth Observin
 <br>
 <div id="weightsList"></div>
 <br>
-<div id="theSplit"></div>
+<div id="splitText"></div>
 <br>
 <div id="confidenceList"></div>
 <?php

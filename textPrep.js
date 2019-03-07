@@ -1,4 +1,4 @@
-/* global pluralize, FEATURE_LIST, ACRONYM_DATASET */
+/* global pluralize, FEATURE_LIST, ACRONYM_DATASET, stopWords, tf, ACRONYM_NUM_CLASSES */
 
 /**
  * Summary. Code to parse and prepare text for TensorFlow.
@@ -9,7 +9,7 @@
  * @author Rob Garcia.
  */
 
-async function textPrepController() {
+function textPrepController() {
     // Get the text
     var context = document.getElementById('myText').value;
     // Remove stopwords and special characters and convert to an array
@@ -81,12 +81,13 @@ async function textPrepController() {
     dataResults += "</tr></table>";
     // Send the HTML string to the view
     document.getElementById('dataSetTable').innerHTML = dataResults;
-    
-    // Add data set identifier to end of matchedArray
-    matchedArray.push(ACRONYM_DATASET.length + 1);
-    // Add matchedArray to data set
-    ACRONYM_DATASET.push(matchedArray);
-    
+
+    // DON'T DO THIS!
+    // Oops! Add data set identifier to end of matchedArray
+    // Oops! matchedArray.push(0);
+    // Oops! - Add matchedArray to data set
+    // Oops! GO - ACRONYM_DATASET.push(matchedArray);
+
     // Display data sets in a table
     var weightsList = "<hr><p>4. Weights for training and test data:</p><table><tr>";
     for (var i = 0; i < ACRONYM_DATASET.length; i++) {
@@ -95,21 +96,87 @@ async function textPrepController() {
 	}
 	weightsList += "</tr><tr>";
     }
+    // Add the matchedArray
+    for (var j = 0; j < matchedArray.length; j++) {
+	weightsList += "<td><b>" + matchedArray[j].toFixed(3) + "</b></td>";
+    }
+    // Add an extra column since matchedArray does not have a target/class/y/label, etc.
+    weightsList += "<td>???</td>";
+    weightsList += "</tr><tr>";
     // Close the table
     weightsList += "</tr></table>";
     // Send the HTML string to the view
     document.getElementById('weightsList').innerHTML = weightsList;
 
+    // The split is the amount of data you want for test. For example, .1 means use 90% of the data for training and 10% for training.    
     // BONUS! This actually updates the split each time you process text
-    var theSplit = "<hr><p>5. The Split = " + (1 / (ACRONYM_DATASET.length)) + "</p>";
-    document.getElementById('theSplit').innerHTML = theSplit;
+    var theSplit = (1 / (ACRONYM_DATASET.length));
+    var splitText = "<hr><p>5. The Split = " + theSplit + "</p>";
+    document.getElementById('splitText').innerHTML = splitText;
 
-    getAcronymData(theSplit);
+    doAcronyms(theSplit, matchedArray);
+}
+
+async function doAcronyms(theSplit, matchedArray) {
+    console.log("The Split = " + theSplit + ", matchedArray length = " + matchedArray.length + ", and matched array = " + matchedArray);
+    const [xTrain, yTrain, xTest, yTest] = getAcronymData(theSplit);
+    model = await trainModel(xTrain, yTrain, xTest, yTest);
+    const input = tf.tensor2d([matchedArray], [1, matchedArray.length]);
+    const prediction = model.predict(input);
+    alert(prediction);
+}
+
+/**
+ * Train a `tf.Model` to recognize Iris flower type.
+ *
+ * @param xTrain Training feature data, a `tf.Tensor` of shape
+ *   [numTrainExamples, 4]. The second dimension include the features
+ *   petal length, petalwidth, sepal length and sepal width.
+ * @param yTrain One-hot training labels, a `tf.Tensor` of shape
+ *   [numTrainExamples, 3].
+ * @param xTest Test feature data, a `tf.Tensor` of shape [numTestExamples, 4].
+ * @param yTest One-hot test labels, a `tf.Tensor` of shape
+ *   [numTestExamples, 3].
+ * @returns The trained `tf.Model` instance.
+ */
+async function trainModel(xTrain, yTrain, xTest, yTest) {
+    const model = tf.sequential();
+    const learningRate = .01;
+    const numberOfEpochs = 40;
+    const optimizer = tf.train.adam(learningRate);
+
+    // Define the topology of the model: two dense layers.
+    model.add(tf.layers.dense({
+	units: 98,
+	activation: 'sigmoid',
+	inputShape: [xTrain.shape[1]]
+    }));
+    model.add(tf.layers.dense({
+	units: ACRONYM_NUM_CLASSES,
+	activation: 'softmax'
+    }));
+    model.summary();
+    model.compile({
+	optimizer: optimizer,
+	loss: 'categoricalCrossentropy',
+	metrics: ['accuracy']
+    });
+    // alert("Here!");
+    // Call `model.fit` to train the model.
+    const history = await model.fit(xTrain, yTrain, {
+	epochs: numberOfEpochs,
+	validationData: [xTest, yTest],
+	callbacks: {
+	    onEpochEnd: async (epoch, logs) => {
+		console.log("Epoch: " + epoch + " Logs: " + logs.loss);
+		await tf.nextFrame();
+	    }
+	}
+    });
+    return model;
 }
 
 function removeStopWords(context) {
-    // Load stop words. Source: https://www.nltk.org/nltk_data/
-    var stopWords = ["a", "about", "above", "after", "again", "against", "ain", "all", "am", "an", "and", "any", "are", "aren", "aren't", "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by", "can", "couldn", "couldn't", "d", "did", "didn", "didn't", "do", "does", "doesn", "doesn't", "doing", "don", "don't", "down", "during", "each", "e.g.", "few", "for", "from", "further", "had", "hadn", "hadn't", "has", "hasn", "hasn't", "have", "haven", "haven't", "having", "he", "her", "here", "hers", "herself", "him", "himself", "his", "how", "i.e.", "i", "if", "in", "into", "is", "isn", "isn't", "it", "its", "it's", "itself", "just", "ll", "m", "ma", "me", "mightn", "mightn't", "more", "most", "mustn", "mustn't", "my", "myself", "needn", "needn't", "no", "nor", "not", "now", "o", "of", "off", "on", "once", "only", "or", "other", "our", "ours", "ourselves", "out", "over", "own", "re", "s", "same", "shan", "shan't", "she", "she's", "should", "shouldn", "shouldn't", "should've", "so", "some", "such", "t", "than", "that", "that'll", "the", "their", "theirs", "them", "themselves", "then", "there", "these", "they", "this", "those", "through", "to", "too", "under", "until", "up", "ve", "very", "was", "wasn", "wasn't", "we", "were", "weren", "weren't", "what", "when", "where", "which", "while", "who", "whom", "why", "will", "with", "won", "won't", "wouldn", "wouldn't", "y", "you", "you'd", "you'll", "your", "you're", "yours", "yourself", "yourselves", "you've"];
     // Convert the text to lowercase and replace all special characters with spaces
     context = context.toLowerCase().replace(/[^\w\s+]/gi, '');
     // Loop text, replacing stopwords with spaces duting each iteration

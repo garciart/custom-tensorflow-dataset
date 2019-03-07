@@ -13,6 +13,7 @@
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
         <script type="text/javascript" src="textPrep.js"></script>
         <script type="text/javascript" src="pluralize.js"></script>
+	<script type="text/javascript" src="constants.js"></script>
 	<script type="text/javascript" src="data.js"></script>
         <script type="text/javascript" src="dataProcessing.js"></script>
         <!-- Content placeholder for head content -->
