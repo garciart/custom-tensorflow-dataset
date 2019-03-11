@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="favicon.ico" type="image/ico">
+        <!-- Load TensorFlow.js -->
+        <!-- Get latest version at https://github.com/tensorflow/tfjs -->
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"></script>
+        <script src="iris_data.js"></script>
+    </head>
+    <body>
+        <div id="output_field"></div>
+        <script>
+            async function trainModel(xTrain, yTrain, xTest, yTest) {
+                const model = tf.sequential();
+                // Set the learning rate
+                const learningRate = .01;
+                // Set the number of iterations
+                const numberOfEpochs = 100;
+                // See API for other optimizers: https://js.tensorflow.org/api/latest/
+                const optimizer = tf.train.adam(learningRate);
+
+                // Define the topology of the model: two dense layers.
+                // Input layer. Using Sigmoid function for classification between 0 and 1
+                // See API for other activation settings: https://js.tensorflow.org/api/latest/
+                model.add(tf.layers.dense({
+                    units: 10,
+                    activation: 'sigmoid',
+                    inputShape: [xTrain.shape[1]]
+                }));
+
+                // Output layer. Softmax normalizes the results so the sum of all the units equals 1
+                // See API for other activation settings: https://js.tensorflow.org/api/latest/
+                model.add(tf.layers.dense({
+                    units: IRIS_NUM_CLASSES,
+                    activation: 'softmax'
+                }));
+
+                // See API for other loss and metric settings: https://js.tensorflow.org/api/latest/
+                model.compile({
+                    optimizer: optimizer,
+                    loss: 'categoricalCrossentropy',
+                    metrics: ['accuracy']
+                });
+
+                // Call `model.fit` to train the model.
+                const history = await model.fit(xTrain, yTrain, {
+                    epochs: numberOfEpochs,
+                    validationData: [xTest, yTest],
+                    callbacks: {
+                        onEpochEnd: async (epoch, logs) => {
+                            console.log("Epoch: " + epoch + " Logs: " + logs.loss);
+                            await tf.nextFrame();
+                        }
+                    }
+                });
+                return model;
+            }
+
+            async function doIris() {
+                const [xTrain, yTrain, xTest, yTest] = getIrisData(0.2);
+                
+                model = await trainModel(xTrain, yTrain, xTest, yTest);
+                
+                // tensor2d() requires shape to be provided when `values` are a flat/TypedArray 
+                const input = tf.tensor2d([6.2, 2.2, 4.5, 1.5], [1, 4]);
+                const prediction = model.predict(input);
+                alert(prediction);
+                
+                // Using ArgMax function to polarize values
+                const predictionWithArgMax = model.predict(input).argMax(-1).dataSync();
+                alert(IRIS_CLASSES[predictionWithArgMax]);
+            }
+            
+            doIris();
+        </script>
+    </body>
+</html>
