@@ -94,3 +94,17 @@
     document.getElementById('theSplit').innerHTML = theSplit;
 
     getAcronymData(theSplit);
+
+
+
+AAA	American Automobile Association
+AAA	Anti-Aircraft Artillery
+AAA	Abdominal Aortic Aneurysm
+
+CIA	Culinary Institute of America
+CIA	Central Intelligence Agency
+CIA	Confidentiality, Integrity and Availability
+
+MIA	Missing In Action
+MIA	Miami International Airport
+MIA	Minneapolis Institute of Arts
