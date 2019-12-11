@@ -61,5 +61,5 @@ $contentPlaceHolder4 = ob_get_contents();
 /* Clean out the buffer and turn off output buffering */
 ob_end_clean();
 /* Call the master page. It will echo the content of the placeholders in the designated locations */
-include("Master.php");
+include("master.php");
 ?>

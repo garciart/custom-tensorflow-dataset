@@ -1,7 +1,7 @@
     // Get the text
     var context = document.getElementById('myText').value;
     // Remove stopwords and special characters and convert to an array
-    var contextArray = removeStopWords(context);
+    var contextArray = RemoveStopWords(context);
     // Map out the frequency of each word
     var frequencyMap = getFrequency(contextArray);
     // Convert to a 2D array and sort by occurence

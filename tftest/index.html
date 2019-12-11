@@ -18,7 +18,7 @@ and open the template in the editor.
     <body>
         <div id="output_field"></div>
         <script>
-            async function trainModel(xTrain, yTrain, xTest, yTest) {
+            async function TrainModel(xTrain, yTrain, xTest, yTest) {
                 const model = tf.sequential();
                 // Set the learning rate
                 const learningRate = .01;
@@ -67,7 +67,7 @@ and open the template in the editor.
             async function doIris() {
                 const [xTrain, yTrain, xTest, yTest] = getIrisData(0.2);
                 
-                model = await trainModel(xTrain, yTrain, xTest, yTest);
+                model = await TrainModel(xTrain, yTrain, xTest, yTest);
                 
                 // tensor2d() requires shape to be provided when `values` are a flat/TypedArray 
                 const input = tf.tensor2d([6.2, 2.2, 4.5, 1.5], [1, 4]);
