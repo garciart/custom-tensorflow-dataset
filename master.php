@@ -8,21 +8,22 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Blue Harvest</title>
-        <link rel="stylesheet" type="text/css" href="StyleSheet.css">
+        <title>Acronyms for Tina | TensorFlow.js Acronym Processing Unit</title>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+        <link rel="icon" href="favicon.ico" type="image/ico">
         <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
-        <script type="text/javascript" src="textPrep.js"></script>
+        <script type="text/javascript" src="text_prep.js"></script>
         <script type="text/javascript" src="pluralize.js"></script>
 	<script type="text/javascript" src="constants.js"></script>
 	<script type="text/javascript" src="data.js"></script>
-        <script type="text/javascript" src="dataProcessing.js"></script>
+        <script type="text/javascript" src="data_processing.js"></script>
         <!-- Content placeholder for head content -->
         <?php echo $contentPlaceHolder1; ?>
     </head>
     <body>
         <header>
             <img id="sherpaLogo" src="sherpa_q2a_logo.png" alt="2019 Sherpas" />
-            <h1>Welcome to Blue Harvest #1!</h1>                
+            <h1>Welcome to Acronyms for Tina!</h1>                
             <!-- Content placeholder for header element content -->
             <?php echo $contentPlaceHolder2; ?>
             <hr>

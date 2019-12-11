@@ -1,0 +1,20 @@
+tftest folder - Iris dataset proof of concept
+.gitignore - Files that will not be uploaded to GitHub due to size, etc.
+LICENSE - MIT License
+Master.php - Website master page for all pages. Also activates all the JavaScript files
+MyTensorFlowTest04c.zip - ???
+README.md - README file for GitHub
+StyleSheet.css - Website stylesheet
+constants.js - Contains constants used by one or more pages
+data.js - Contains the acronyms dataset
+data_processing.js - Processes the dataset
+favicon.ico - The website's icon
+generate.c - Auxiliary program to increase the dataset's size
+generate.exe - Generate executable
+index.php - Website landing page
+pluralize.js - Used to convert words to singular form for better processing
+sherpa_q2a_logo.png - NASA Langley Sherpa Logo
+tensor_flow.js - Practice code from tutorial
+text_prep.js - Code to prepare the input text for processing:
+
+

@@ -11,6 +11,16 @@ table {
     padding: 3px;
     width: 100%;
 }
+.tableByCol {
+    display: table;
+}
+.tableByCol tr {
+    display: table-cell;
+    vertical-align: top;
+}
+.tableByCol tr td {
+    display: block;
+}
 header {
     padding: 12px 0;
 }

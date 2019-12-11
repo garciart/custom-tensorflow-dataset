@@ -9,6 +9,58 @@
  */
 
 /**
+ * Obtains Acronym data, split into training and test sets.
+ *
+ * @param testSplit Fraction of the data at the end to split as test data: a
+ *   number between 0 and 1.
+ *
+ * @return A length-4 'Array', with
+ *   - training data as an 'Array' of length-4 'Array' of numbers.
+ *   - training labels as an 'Array' of numbers, with the same length as the
+ *     return training data above. Each element of the 'Array' is from the set
+ *     {0, 1, 2}.
+ *   - test data as an 'Array' of length-4 'Array' of numbers.
+ *   - test labels as an 'Array' of numbers, with the same length as the
+ *     return test data above. Each element of the 'Array' is from the set
+ *     {0, 1, 2}.
+ */
+function getAcronymData(testSplit) {
+    return tf.tidy(() => {
+	const dataByClass = [];
+	const targetsByClass = [];
+	for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
+	    dataByClass.push([]);
+	    targetsByClass.push([]);
+	}
+	for (const example of ACRONYM_DATASET) {
+	    const target = example[example.length - 1];
+	    const data = example.slice(0, example.length - 1);
+	    dataByClass[target].push(data);
+	    targetsByClass[target].push(target);
+	}
+
+	const xTrains = [];
+	const yTrains = [];
+	const xTests = [];
+	const yTests = [];
+	for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
+	    const [xTrain, yTrain, xTest, yTest] =
+		    convertToTensors(dataByClass[i], targetsByClass[i], testSplit);
+	    xTrains.push(xTrain);
+	    yTrains.push(yTrain);
+	    xTests.push(xTest);
+	    yTests.push(yTest);
+	}
+
+	const concatAxis = 0;
+	return [
+	    tf.concat(xTrains, concatAxis), tf.concat(yTrains, concatAxis),
+	    tf.concat(xTests, concatAxis), tf.concat(yTests, concatAxis)
+	];
+    });
+}
+
+/**
  * Convert Acronym data arrays to 'tf.Tensor's.
  *
  * @param data The Acronym input feature data, an 'Array' of 'Array's, each element
@@ -64,56 +116,4 @@ function convertToTensors(data, targets, testSplit) {
     const yTrain = ys.slice([0, 0], [numTrainExamples, ACRONYM_NUM_CLASSES]);
     const yTest = ys.slice([0, 0], [numTestExamples, ACRONYM_NUM_CLASSES]);
     return [xTrain, yTrain, xTest, yTest];
-}
-
-/**
- * Obtains Acronym data, split into training and test sets.
- *
- * @param testSplit Fraction of the data at the end to split as test data: a
- *   number between 0 and 1.
- *
- * @return A length-4 'Array', with
- *   - training data as an 'Array' of length-4 'Array' of numbers.
- *   - training labels as an 'Array' of numbers, with the same length as the
- *     return training data above. Each element of the 'Array' is from the set
- *     {0, 1, 2}.
- *   - test data as an 'Array' of length-4 'Array' of numbers.
- *   - test labels as an 'Array' of numbers, with the same length as the
- *     return test data above. Each element of the 'Array' is from the set
- *     {0, 1, 2}.
- */
-function getAcronymData(testSplit) {
-    return tf.tidy(() => {
-	const dataByClass = [];
-	const targetsByClass = [];
-	for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
-	    dataByClass.push([]);
-	    targetsByClass.push([]);
-	}
-	for (const example of ACRONYM_DATASET) {
-	    const target = example[example.length - 1];
-	    const data = example.slice(0, example.length - 1);
-	    dataByClass[target].push(data);
-	    targetsByClass[target].push(target);
-	}
-
-	const xTrains = [];
-	const yTrains = [];
-	const xTests = [];
-	const yTests = [];
-	for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
-	    const [xTrain, yTrain, xTest, yTest] =
-		    convertToTensors(dataByClass[i], targetsByClass[i], testSplit);
-	    xTrains.push(xTrain);
-	    yTrains.push(yTrain);
-	    xTests.push(xTest);
-	    yTests.push(yTest);
-	}
-
-	const concatAxis = 0;
-	return [
-	    tf.concat(xTrains, concatAxis), tf.concat(yTrains, concatAxis),
-	    tf.concat(xTests, concatAxis), tf.concat(yTests, concatAxis)
-	];
-    });
 }
