@@ -111,11 +111,9 @@ function textPrepController() {
     document.getElementById('weightsList').innerHTML = weightsList;
 
     // The split is the amount of data you want for test. For example, .1 means use 90% of the data for training and 10% for training.    
-    // BONUS! This actually updates the split each time you process text
-    var theSplit = (1 / (ACRONYM_DATASET.length));
+    var theSplit = 0.2;
     var splitText = "<hr><p>5. The Split = " + theSplit + "</p>";
     document.getElementById('splitText').innerHTML = splitText;
-
     doAcronyms(theSplit, matchedArray);
 }
 
@@ -161,7 +159,7 @@ async function trainModel(xTrain, yTrain, xTest, yTest) {
     // Input layer. Using Sigmoid function for classification between 0 and 1
     // See API for other activation settings: https://js.tensorflow.org/api/latest/
     model.add(tf.layers.dense({
-        units: 10,
+        units: ACRONYM_NUM_CLASSES,
         activation: 'sigmoid',
         inputShape: [xTrain.shape[1]]
     }));
@@ -259,8 +257,6 @@ function sort2EArray(arrayToSort, column, order) {
             }
         });
     }
-
-
     return arrayToSort;
 }
 

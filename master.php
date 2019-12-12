@@ -11,7 +11,8 @@
         <title>Acronyms for Tina | TensorFlow.js Acronym Processing Unit</title>
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <link rel="icon" href="favicon.ico" type="image/ico">
-        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.11.2"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"></script> -->
         <script type="text/javascript" src="text_prep.js"></script>
         <script type="text/javascript" src="pluralize.js"></script>
 	<script type="text/javascript" src="constants.js"></script>
