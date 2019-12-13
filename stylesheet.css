@@ -3,11 +3,16 @@
  */
 
 body {
-    font-family: monospace;
+    font-family: sans-serif;
     width: 80%;
     margin: auto;
 }
+textarea {
+    font-family: monospace;
+    width:100%;
+}
 table {
+    font-family: monospace;
     padding: 3px;
     width: 100%;
 }

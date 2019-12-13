@@ -118,6 +118,7 @@ function textPrepController() {
 }
 
 async function doAcronyms(theSplit, matchedArray) {
+    alert("Prediction in progress...\nPlease do not close this page unitl after the next alert box appears with your results.");
     console.log("The Split = " + theSplit + ", matchedArray length = " + matchedArray.length + ", and matched array = " + matchedArray);
     const [xTrain, yTrain, xTest, yTest] = getAcronymData(theSplit);
     
@@ -126,11 +127,15 @@ async function doAcronyms(theSplit, matchedArray) {
     // tensor2d() requires shape to be provided when `values` are a flat/TypedArray 
     const input = tf.tensor2d([matchedArray], [1, matchedArray.length]);
     const prediction = model.predict(input);
-    alert(prediction);
+    var myText = "";
+    for(var i = 0; i < ACRONYM_CLASSES.length; i++) {
+        myText += ACRONYM_CLASSES[i] + ": " + prediction.dataSync()[i].toFixed(5) + "\n";
+    }
+    alert("Results:\n" + myText);
     
     // Using ArgMax function to polarize values
     const predictionWithArgMax = model.predict(input).argMax(-1).dataSync();
-    alert(ACRONYM_CLASSES[predictionWithArgMax]);
+    alert("Prediction: " + ACRONYM_CLASSES[predictionWithArgMax]);
 }
 
 /**
