@@ -11,6 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="favicon.ico" type="image/ico">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -20,53 +21,34 @@ and open the template in the editor.
         <script type="text/javascript" src="constants.js"></script>
         <script type="text/javascript" src="data.js"></script>
         <script type="text/javascript" src="data_processing.js"></script>
-        <style>
-            body {
-                font-family: monospace;
-                width: 90%;
-                margin: auto;
-            }
-            .highlight {
-                background-color: yellow;
-            }
-            header {
-                padding: 12px 0;
-            }
-            #sherpaLogo {
-                float:left;
-                height:100px;
-                padding-right: 12px;
-            }
-        </style>
     </head>
     <body>
         <div class="container">
             <header>
                 <img id="sherpaLogo" src="sherpa_q2a_logo.png" alt="2019 Sherpas" />
                 <h1>Welcome to Acronyms for Tina!</h1>                
-                <h3>TensorFlow.js Acronym Processing Unit</h3>
+                <h2>TensorFlow.js Acronym Processing Unit</h2>
                 <hr>
             </header>
             <main class="row">
-                <p>1. Enter the text you want to analyze below:</p>
-                <textarea id="myText" rows="25" style="width:100%;">
+                <div class="container">
+                    <p>1. Enter the text you want to analyze below:</p>
+                    <textarea id="myText" rows="25">
 The National Aeronautics and Space Administration (N.A.S.A.) is an independent agency of the United States Federal Government responsible for the civilian space program, as well as aeronautics and aerospace research.
 
 NASA was established in 1958, succeeding the National Advisory Committee for Aeronautics (NACA). The new agency was to have a distinctly civilian orientation, encouraging peaceful applications in space science. Since its establishment, most US space exploration efforts have been led by NASA, including the Apollo Moon landing missions, the Skylab space station, and later the Space Shuttle. NASA is supporting the International Space Station and is overseeing the development of the Orion Multi-Purpose Crew Vehicle, the Space Launch System and Commercial Crew vehicles. The agency is also responsible for the Launch Services Program which provides oversight of launch operations and countdown management for unmanned NASA launches.
 
 NASA science is focused on better understanding Earth through the Earth Observing System; advancing heliophysics through the efforts of the Science Mission Directorate's Heliophysics Research Program; exploring bodies throughout the Solar System with advanced robotic spacecraft missions such as New Horizons; and researching astrophysics topics, such as the Big Bang, through the Great Observatories and associated programs.
-                </textarea>
-                <input type="button" value="Process text" onclick="textPrepController();"/>
-                <br>
-                <div id="frequencyTable"></div>
-                <br>
-                <div id="dataSetTable"></div>
-                <br>
-                <div id="weightsList"></div>
-                <br>
-                <div id="splitText"></div>
-                <br>
-                <div id="confidenceList"></div>
+                    </textarea>
+                    <input type="button" value="Process text" onclick="textPrepController();"/>
+                </div>
+                <div class="container">
+                    <div id="frequencyTable"></div>
+                    <div id="dataSetTable"></div>
+                    <div id="weightsList"></div>
+                    <div id="splitText"></div>
+                    <div id="confidenceList"></div>
+                </div>
             </main>
             <footer>
                 <hr>
