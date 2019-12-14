@@ -1,4 +1,5 @@
 # Acronyms for Tina!
+<p>Try it live at <a href="http://acronymsfortina.rgprogramming.com/index.html" title="Acronyms for Tina | TensorFlow.js Acronym Recognition Application" target="_blank">http://acronymsfortina.rgprogramming.com/index.html</a>!</p>
 <img src="image00.png" alt="" style="border: 1px solid black;" />
 <hr>
 <h2>Overview</h2>
