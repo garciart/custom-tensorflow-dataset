@@ -1,12 +1,12 @@
-/* global tf, ACRONYM_CLASSES, ACRONYM_DATASET, ACRONYM_NUM_CLASSES */
-
 /**
  * Summary. Original TensorFlow.js code, used to classify irises (the flower).
- *  * Description. All comments and modifications are based on the information found at https://js.tensorflow.org/api or one of Laurence Moroney's excellent tutorials at Coding TensorFlow.
+ * Description. All comments and modifications are based on the information found at https://js.tensorflow.org/api or one of Laurence Moroney's excellent tutorials at Coding TensorFlow.
  *
  * @link   https://github.com/tensorflow/tfjs-examples/tree/master/iris
  * @author Laurence Moroney, modified by Rob Garcia.
  */
+
+/* global tf, ACRONYM_CLASSES, ACRONYM_DATASET, ACRONYM_NUM_CLASSES */
 
 /**
  * Obtains Acronym data, split into training and test sets.
@@ -26,37 +26,37 @@
  */
 function getAcronymData(testSplit) {
     return tf.tidy(() => {
-	const dataByClass = [];
-	const targetsByClass = [];
-	for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
-	    dataByClass.push([]);
-	    targetsByClass.push([]);
-	}
-	for (const example of ACRONYM_DATASET) {
-	    const target = example[example.length - 1];
-	    const data = example.slice(0, example.length - 1);
-	    dataByClass[target].push(data);
-	    targetsByClass[target].push(target);
-	}
+        const dataByClass = [];
+        const targetsByClass = [];
+        for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
+            dataByClass.push([]);
+            targetsByClass.push([]);
+        }
+        for (const example of ACRONYM_DATASET) {
+            const target = example[example.length - 1];
+            const data = example.slice(0, example.length - 1);
+            dataByClass[target].push(data);
+            targetsByClass[target].push(target);
+        }
 
-	const xTrains = [];
-	const yTrains = [];
-	const xTests = [];
-	const yTests = [];
-	for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
-	    const [xTrain, yTrain, xTest, yTest] =
-		    convertToTensors(dataByClass[i], targetsByClass[i], testSplit);
-	    xTrains.push(xTrain);
-	    yTrains.push(yTrain);
-	    xTests.push(xTest);
-	    yTests.push(yTest);
-	}
+        const xTrains = [];
+        const yTrains = [];
+        const xTests = [];
+        const yTests = [];
+        for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
+            const [xTrain, yTrain, xTest, yTest] =
+                    convertToTensors(dataByClass[i], targetsByClass[i], testSplit);
+            xTrains.push(xTrain);
+            yTrains.push(yTrain);
+            xTests.push(xTest);
+            yTests.push(yTest);
+        }
 
-	const concatAxis = 0;
-	return [
-	    tf.concat(xTrains, concatAxis), tf.concat(yTrains, concatAxis),
-	    tf.concat(xTests, concatAxis), tf.concat(yTests, concatAxis)
-	];
+        const concatAxis = 0;
+        return [
+            tf.concat(xTrains, concatAxis), tf.concat(yTrains, concatAxis),
+            tf.concat(xTests, concatAxis), tf.concat(yTests, concatAxis)
+        ];
     });
 }
 
@@ -80,21 +80,21 @@ function getAcronymData(testSplit) {
 function convertToTensors(data, targets, testSplit) {
     const numExamples = data.length;
     if (numExamples !== targets.length) {
-	throw new Error('data and split have different numbers of examples');
+        throw new Error('data and split have different numbers of examples');
     }
 
     // Randomly shuffle 'data' and 'targets'.
     const indices = [];
     for (let i = 0; i < numExamples; ++i) {
-	indices.push(i);
+        indices.push(i);
     }
     tf.util.shuffle(indices);
 
     const shuffledData = [];
     const shuffledTargets = [];
     for (let i = 0; i < numExamples; ++i) {
-	shuffledData.push(data[indices[i]]);
-	shuffledTargets.push(targets[indices[i]]);
+        shuffledData.push(data[indices[i]]);
+        shuffledTargets.push(targets[indices[i]]);
     }
 
     // Split the data into a training set and a tet set, based on 'testSplit'.
