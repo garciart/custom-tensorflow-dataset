@@ -12,7 +12,7 @@
 function appController() {
     // Get the text
     var context = document.getElementById('myText').value;
-    if (context === "") {
+    if (context.trim() === "") {
         alert("Error: No text to process!");
     } else {
         // Remove stopwords and special characters and convert to an array
@@ -30,7 +30,7 @@ function appController() {
         // Set the minimum to zero to allow all words in the text to be weighted
         var arrayMin = 0;
         // Prepare the HTML string. THE TABLE IS FLIPPED IN THE STYLESHEET TO LIST WORDS BY COLUMN
-        var results = "<hr><p>2. Breakdown of words by frequency:</p><table class=\"tableByCol\"><tr>";
+        var results = "<hr><p class=\"lead font-weight-bold\">2. Breakdown of words by frequency:</p><table class=\"tableByCol\"><tr>";
         /*
          * Add words to the table, sorted by frequency and in descending order
          * Display the word, the frequency and the frequency scaled between 1 and 0
@@ -72,7 +72,7 @@ function appController() {
             }
         }
         // Display the results
-        var dataResults = "<hr><p>3. Text content matched to dataset features with weights (scaled between 0 and 1):</p><table class=\"tableByCol\"><tr>";
+        var dataResults = "<hr><p class=\"lead font-weight-bold\">3. Text content matched to dataset features with weights (scaled between 0 and 1):</p><table class=\"tableByCol\"><tr>";
         for (var i = 0; i < FEATURE_LIST.length; i++) {
             // Highlight if not zero
             var highlight = (matchedArray[i] !== 0 ? "<span class=\"highlight\">" : "<span>");
@@ -86,16 +86,17 @@ function appController() {
         // Send the HTML string to the view
         document.getElementById('dataSetTable').innerHTML = dataResults;
 
-        // The split is the amount of data you want for test. For example, .1 means use 90% of the data for training and 10% for training.    
+        // The split is the amount of data you want for test. For example, .1 means use 90% of the data for training and 10% for training. Will be adjustable in the future.   
         var theSplit = 0.2;
-        var splitText = "<hr><p>4. The Split = " + theSplit + " (Using " + (100 - (theSplit * 100)) + "% of the dataset for training and " + (theSplit * 100) + "% for testing)" + "</p>";
+        var splitText = "<hr><p class=\"lead font-weight-bold\">4. The Split = " + theSplit + " (Using " + (100 - (theSplit * 100)) + "% of the dataset for training and " + (theSplit * 100) + "% for testing)" + "</p>";
         document.getElementById('splitText').innerHTML = splitText;
-
+        
+        // The minimum confidence level that must be met for the prediction to be acceptedable. Will be adjustable in the future.
         var minConfidenceLevel = 0.5;
-        var confidenceLevel = "<hr><p>5. Minimum confidence level = " + minConfidenceLevel + "</p>";
+        var confidenceLevel = "<hr><p class=\"lead font-weight-bold\">5. Minimum confidence level expected = " + minConfidenceLevel + "</p>";
         document.getElementById('splitText').innerHTML = confidenceLevel;
 
-        // Call asynchronous function doAcronyms 
+        // Call asynchronous function doAcronyms().
         doAcronyms(theSplit, matchedArray, minConfidenceLevel);
     }
 }
@@ -109,7 +110,7 @@ function appController() {
  */
 async function doAcronyms(theSplit, matchedArray, confidenceLevel) {
     alert("Starting prediction process...\n\nPlease do not close this page unitl after the next alert box appears with your results.");
-    console.log("The Split = " + theSplit + ", the matchedArray length = " + matchedArray.length + ", and the matchedArray's elements = " + matchedArray);
+    console.log("The Split = " + theSplit + "\nThe matchedArray length = " + matchedArray.length + "\nThe matchedArray's elements = " + matchedArray);
     const [xTrain, yTrain, xTest, yTest] = getAcronymData(theSplit);
 
     model = await trainModel(xTrain, yTrain, xTest, yTest);
@@ -128,27 +129,26 @@ async function doAcronyms(theSplit, matchedArray, confidenceLevel) {
     resultArray.sort();
     resultArray.reverse();
 
-    var confidenceList = "<hr><p>6. Results (sorted by confidence):</p><table>";
+    var confidenceList = "<hr><p class=\"lead font-weight-bold\">6. Results (sorted by confidence):</p><table>";
     for (var i = 0; i < ACRONYM_CLASSES.length; i++) {
         confidenceList += "<tr><td>" + resultArray[i] + "</td></tr>";
     }
     confidenceList += "</table>";
-    console.log("Results:\n" + resultArray);
-    alert("Results:\n" + resultArray);
     if (confidenceLevelMet === false) {
-        confidenceList += ("<p class=\"text-danger\">CONFIDENCE LEVEL (" + confidenceLevel + ") not met for any acronym in the dataset!</p>");
+        confidenceList += ("<div class=\"lead font-weight-bold text-danger\">CONFIDENCE LEVEL (" + confidenceLevel + ") not met for any acronym in the dataset!</div>");
         console.log("WARNING: CONFIDENCE LEVEL (" + confidenceLevel + ") not met for any acronym in the dataset!\n");
         alert("WARNING: CONFIDENCE LEVEL (" + confidenceLevel + ") not met for any acronym in the dataset!\n");
     }
     document.getElementById('confidenceList').innerHTML = confidenceList;
+    console.log("Results:\n" + resultArray);
+    alert("Results:\n" + resultArray);    
 
     // Using ArgMax function to polarize values
     const predictionWithArgMax = model.predict(input).argMax(-1).dataSync();
-    var acronymPrediction = "<hr><p>7. Prediction: <strong>" + ACRONYM_CLASSES[predictionWithArgMax] + "</strong></p>";
+    var acronymPrediction = "<hr><p class=\"lead font-weight-bold\">7. Prediction: " + ACRONYM_CLASSES[predictionWithArgMax] + "</p>";
+
     document.getElementById('acronymPrediction').innerHTML = acronymPrediction;
-
     console.log("Prediction: " + ACRONYM_CLASSES[predictionWithArgMax]);
-
     alert("Prediction: " + ACRONYM_CLASSES[predictionWithArgMax]);
 }
 
