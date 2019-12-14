@@ -9,6 +9,12 @@
 
 /* global define */
 
+/**
+ * 
+ * @param {type} root
+ * @param {type} pluralize
+ * @returns {undefined}
+ */
 (function (root, pluralize) {
     /* istanbul ignore else */
     if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
@@ -161,6 +167,12 @@
 
     /**
      * Check if a word is part of the map.
+     * 
+     * @param {type} replaceMap
+     * @param {type} keepMap
+     * @param {type} rules
+     * @param {type} bool
+     * @returns {Function}
      */
     function checkWord(replaceMap, keepMap, rules, bool) {
         return function (word) {

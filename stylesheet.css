@@ -1,11 +1,11 @@
-/* 
- *  Author     : Rob Garcia at rgarcia@rgprogramming.com.
+/**
+ * Summary. CSS augment of Bootstrap styling for application
+ *
+ * @author Rob Garcia at rgarcia@rgprogramming.com.
  */
 
 body {
-    font-family: sans-serif;
-    width: 80%;
-    margin: auto;
+
 }
 textarea {
     font-family: monospace;
@@ -16,23 +16,17 @@ table {
     padding: 3px;
     width: 100%;
 }
+/* For multi-column tables, flow data down and right, instead of right and down */
 .tableByCol {
     display: table;
 }
 .tableByCol tr {
     display: table-cell;
     vertical-align: top;
+    width: 33%;
 }
 .tableByCol tr td {
     display: block;
-}
-header {
-    padding: 12px 0;
-}
-#sherpaLogo {
-    float:left;
-    height:100px;
-    padding-right: 12px;
 }
 .highlight {
     background-color: yellow;

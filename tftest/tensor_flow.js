@@ -7,7 +7,14 @@
  * @author Laurence Moroney.
  */
 
-async function learnLinear(y) {
+/* global tf */
+
+/**
+ * Determines y value for x input, based on slope calculated from dataset xs and ys
+ * 
+ * @param x x values for a line
+ */
+async function learnLinear(x) {
     // A sequential model is any model where the outputs of one layer are the inputs to the next layer, i.e. the model topology is a simple 'stack' of layers, with no branching or skipping
     const model = tf.sequential();
     // Create a dense layer where each layer is fully connected to the other
@@ -28,6 +35,6 @@ async function learnLinear(y) {
     await model.fit(xs, ys, {epochs: 250});
     // Output result */
     document.getElementById('output_field').innerText = model.predict(
-            tf.tensor2d([y], [1, 1])
+            tf.tensor2d([x], [1, 1])
             );
 }
