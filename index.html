@@ -6,7 +6,8 @@
         <meta name="description" content="TensorFlow.js Acronym Recognition Application">
         <meta name="author" content="Rob Garcia">
         <title>Acronyms for Tina | TensorFlow.js Acronym Recognition Application</title>
-        <link rel="icon" href="favicon.ico" type="image/ico">
+        <!--<link rel="icon" href="favicon.ico" type="image/ico">-->
+		<link rel="icon" type="image/png" href="sherpa_q2a_logo.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
     </head>
@@ -47,9 +48,8 @@
         <main class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p><strong>Note: </strong>Open your developer/debugging console to see beneath the hood.</p>
-                    <hr>
-                    <p>1. Enter the text you want to analyze below:</p>
+                    <p class="lead font-weight-bold">1. Enter the text you want to analyze below:</p>
+                    <div class="p-3 mb-2 bg-info text-white"><strong>Hint: </strong>Open your developer/debugging console to see beneath the hood.</div>
                     <textarea id="myText" rows="25">
 The National Aeronautics and Space Administration (N.A.S.A.) is an independent agency of the United States Federal Government responsible for the civilian space program, as well as aeronautics and aerospace research.
 
@@ -57,8 +57,8 @@ NASA was established in 1958, succeeding the National Advisory Committee for Aer
 
 NASA science is focused on better understanding Earth through the Earth Observing System; advancing heliophysics through the efforts of the Science Mission Directorate's Heliophysics Research Program; exploring bodies throughout the Solar System with advanced robotic spacecraft missions such as New Horizons; and researching astrophysics topics, such as the Big Bang, through the Great Observatories and associated programs.
                     </textarea>
-                    <input type="button" value="Process text" onclick="appController();"/>
-                    <input type="button" value="Clear text" onclick="javascript:eraseTextarea();"/>
+                    <input type="button" class="btn btn-primary" value="Process text" onclick="appController();"/>
+                    <input type="button" class="btn btn-warning" value="Clear text" onclick="javascript:eraseTextarea();"/>
                 </div>
                 <div id="frequencyTable" class="col-md-12"></div>
                 <div id="dataSetTable" class="col-md-12"></div>
