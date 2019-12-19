@@ -109,7 +109,7 @@ function appController() {
  * @returns {undefined}
  */
 async function doAcronyms(theSplit, matchedArray, confidenceLevel) {
-    alert("Starting prediction process...\n\nPlease do not close this page unitl after the next alert box appears with your results.");
+    alert("Starting prediction process...\n\nWAIT FOR IT!\n\nPlease do not close this page unitl after the next alert box appears with your results.");
     console.log("The Split = " + theSplit + "\nThe matchedArray length = " + matchedArray.length + "\nThe matchedArray's elements = " + matchedArray);
     const [xTrain, yTrain, xTest, yTest] = getAcronymData(theSplit);
 
@@ -145,7 +145,7 @@ async function doAcronyms(theSplit, matchedArray, confidenceLevel) {
 
     // Using ArgMax function to polarize values
     const predictionWithArgMax = model.predict(input).argMax(-1).dataSync();
-    var acronymPrediction = "<hr><p class=\"lead font-weight-bold\">7. Prediction: " + ACRONYM_CLASSES[predictionWithArgMax] + "</p>";
+    var acronymPrediction = "<hr><p class=\"lead font-weight-bold\">7. Prediction: <span class=\"text-danger\">" + ACRONYM_CLASSES[predictionWithArgMax] + "</span></p>";
 
     document.getElementById('acronymPrediction').innerHTML = acronymPrediction;
     console.log("Prediction: " + ACRONYM_CLASSES[predictionWithArgMax]);
