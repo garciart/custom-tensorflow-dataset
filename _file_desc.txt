@@ -1,15 +1,16 @@
 .gitignore - Files that will not be uploaded to GitHub due to size, etc.
-LICENSE - MIT License
-README.md - README file for GitHub
 about.html - About page
 acronym_data.js - Contains the acronyms dataset
-app_engine.js - Code to prepare the input text for processing:
+app_engine.js - Code to prepare the input text for processing
 constants.js - Contains constants used by one or more pages
 favicon.ico - The website's icon
+image00.png - README.md image
 index.html - Application landing page
+LICENSE - MIT License
 pluralize.js - Used to convert words to singular form for better processing
+README.md - README file for GitHub
 sherpa_q2a_logo.png - NASA Langley Sherpa Logo
-StyleSheet.css - Website stylesheet
+stylesheet.css - Website stylesheet
 tf_engine.js - Processes the dataset
 tftest folder - Iris dataset proof of concept
 utilities folder - Utility applications to help me out
