@@ -4,8 +4,8 @@
  * @author Rob Garcia at rgarcia@rgprogramming.com.
  */
 
-body {
-
+header {
+    padding-top: 60px;
 }
 textarea {
     font-family: monospace;

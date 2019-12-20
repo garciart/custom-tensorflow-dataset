@@ -3,7 +3,7 @@
 <img src="image00.png" alt="" class="border img-fluid" />
 <hr>
 <h2>Overview</h2>
-<p>During our internships at NASA's Langley Research Center, one of our mentors, Tina, asked us to help her out on a project: an acronym disambiguation system. She's absolutely right; acronyms are a pain in the a** when you are trying to learn about something really dense in a hurry (yay, grad school!). Plus, when I was in the military, I remember the "glazed-eye look" that would appear on my friends and family's faces when I broke into an acronym-filled story. I'm worse; you break out the acronyms with me, and I fall asleep!</p>
+<p>During our internships at NASA's Langley Research Center, one of our mentors, Tina, asked us to help her out on a project: an acronym disambiguation system. She's right about the need; acronyms are a pain in the a** when you are trying to learn about something really dense in a hurry (yay, grad school!). Plus, when I was in the military, I remember the "glazed-eye look" that would appear on my friends and family's faces when I broke into an acronym-filled story. I'm worse; you break out the acronyms with me, and I fall asleep!</p>
 <p>One of my fellow Sherpas, Wesley, got pretty far using IBM Watson and the Natural Language Toolkit (NLTK) Project. Here's my take on Tina's project using TensorFlow.js. In a nutshell, it replaces the Iris dataset with words that can be abbreviated using "CSS". Since this is only a proof of concept, I limited the dataset to CSS acronyms that had at least 3000 results in a regular Google search and at least one appearance in Google Scholar (another mentor, Cory, compiled a list of acronyms used by NASA, including "CSS", but I didn't keep them <i class="far fa-frown"></i>):</p>
 <div style="margin: auto;">
 <table class="table table-striped">
@@ -26,14 +26,15 @@
 </tbody>
 </table>
 </div>
-<p>This is how it works:</p>
+<hr>
+<h2>How it works:</h2>
 <ol>
-<li>Remove the stop words (e.g., and, the, etc.), using the list of stop words from the Natural Language Toolkit Project (https://www.nltk.org/nltk_data/).</li>
-<li>Convert all the words to singular using <a href="https://github.com/blakeembrey/pluralize" title="Pluralize" target="_blank">Blake Embrey's awesome script</a>.</li>
-<li>Identify how often each word appears in the text (i.e., the frequency).</li>
-<li>Map the words to the features in the dataset, using the word's frequency of appearance as it's weight (normalized to a scale of 0 to 1).</li>
-<li>Kick off the TensorFlow engine, using the built-in CSS dataset for training and testing. TensorFlow.js is awesome and Laurence Moroney at Google does an awesome job explaining how it works: <a href="https://www.youtube.com/playlist?list=PLQY2H8rRoyvwLbzbnKJ59NkZvQAW9wLbx" title="Coding TensorFlow" target="_blank">check him out at Coding TensorFlow!</a></li>
-<li>Run the map of words against the trained dataset and get a prediction.</li>
+<li>The app removes all the stop words (e.g., and, the, etc.) from the text, using the list of stop words from the <a href="https://www.nltk.org/nltk_data/" title="Natural Language Toolkit Project" target="_blank">Natural Language Toolkit Project</a>.</li>
+<li>It then converts all the words to singular form using <a href="https://github.com/blakeembrey/pluralize" title="Pluralize" target="_blank">Blake Embrey's awesome script</a>.</li>
+<li>Next, it counts how often each word appears in the text (i.e., the frequency).</li>
+<li>The app then maps as many words as it can to the feature words in the dataset, using the frequency of appearance as its weight (normalized to a scale of 0 to 1).</li>
+<li>It then kicks off the TensorFlow engine, using the built-in CSS dataset to build a training and testing dataset. TensorFlow.js is awesome and Laurence Moroney at Google does an awesome job explaining how it works: <a href="https://www.youtube.com/playlist?list=PLQY2H8rRoyvwLbzbnKJ59NkZvQAW9wLbx" title="Coding TensorFlow" target="_blank">check him out at Coding TensorFlow!</a></li>
+<li>Finally, it runs the map of words against the trained dataset to get a prediction.</li>
 </ol>
 <p>The <a href="https://github.com/tensorflow/tfjs-examples/tree/master/iris" title="Iris classification application" target="_blank">Iris classification application</a> is like the "Hello, World!" of machine learning, and it's a great way to get started. I modified it to use words, but you can replace the dataset with any stats you want, such as readings from engine computers, IoT devices, etc. For a deeper dive, check out <a href="https://www.coursera.org/learn/machine-learning" title="Coursera: Machine Learning" target="_blank"> Andrew Ng's great tutorials on Coursera</a>. Have fun and good luck!</p>
 <hr>
