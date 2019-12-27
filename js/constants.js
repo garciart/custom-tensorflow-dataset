@@ -1,6 +1,7 @@
 /**
  * Summary. Constants common to two or more files
  * 
+ * @link   http://acronymsfortina.rgprogramming.com/index.html
  * @author Rob Garcia at rgarcia@rgprogramming.com.
  */
 

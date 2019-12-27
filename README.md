@@ -1,6 +1,6 @@
 # Acronyms for Tina!
 <p>Try it live at <a href="http://acronymsfortina.rgprogramming.com/index.html" title="Acronyms for Tina | TensorFlow.js Acronym Recognition Application" target="_blank">http://acronymsfortina.rgprogramming.com/index.html</a>!</p>
-<img src="image00.png" alt="" class="border img-fluid" />
+<img src="img/image00.png" alt="" class="border img-fluid" />
 <hr>
 <h2>Overview</h2>
 <p>During our internships at NASA's Langley Research Center, one of our mentors, Tina, asked us to help her out on a project: an acronym disambiguation system. She's right about the need; acronyms are a pain in the a** when you are trying to learn about something really dense in a hurry (yay, grad school!). Plus, when I was in the military, I remember the "glazed-eye look" that would appear on my friends and family's faces when I broke into an acronym-filled story. I'm worse; you break out the acronyms with me, and I fall asleep!</p>
@@ -26,6 +26,7 @@
 </tbody>
 </table>
 </div>
+<br style="clear: both;">
 <hr>
 <h2>How it works:</h2>
 <ol>

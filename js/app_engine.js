@@ -3,7 +3,7 @@
  *
  * Description. This code process text (e.g., removing stop words, etc.), then breaks down the text into a useable dataset for use by dataProcessing.js
  *
- * @link   http://mytensorflowtest-env.pj6m2pd7jr.us-east-1.elasticbeanstalk.com/
+ * @link   http://acronymsfortina.rgprogramming.com/index.html
  * @author Rob Garcia.
  */
 
@@ -60,7 +60,8 @@ function appController() {
         });
         // Create and array to hold the scaled weights
         var matchedArray = [];
-        /* Iterate through FEATURE_LIST. If the word is present in the list, record
+        /*
+         * Iterate through FEATURE_LIST. If the word is present in the list, record
          * the weight in matchedArray. Otherwise, enter 0.0
          */
         for (var i = 0; i < FEATURE_LIST.length; i++) {
@@ -230,7 +231,7 @@ function removeStopWords(context) {
 
 function convertToSingular(contextArray) {
     for (var i = 0; i < contextArray.length; i++) {
-        // Convert to singular using Blake Embrey's awesome pluralize.js at https://github.com/blakeembrey/pluralize
+        // Convert to singular using Blake Embrey's awesome js/pluralize.js at https://github.com/blakeembrey/pluralize
         contextArray[i] = pluralize.singular(contextArray[i]);
     }
     return contextArray;
