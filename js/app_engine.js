@@ -87,7 +87,7 @@ function appController() {
         // Send the HTML string to the view
         document.getElementById('dataSetTable').innerHTML = dataResults;
 
-        // The split is the amount of data you want for test. For example, .1 means use 90% of the data for training and 10% for training. Will be adjustable in the future.   
+        // The split is the amount of data you want for test. For example, .1 means use 90% of the data for training and 10% for testing. Will be adjustable in the future.   
         var theSplit = 0.2;
         var splitText = "<hr><p class=\"lead font-weight-bold\">4. The Split = " + theSplit + " (Using " + (100 - (theSplit * 100)) + "% of the dataset for training and " + (theSplit * 100) + "% for testing)" + "</p>";
         document.getElementById('splitText').innerHTML = splitText;
@@ -110,7 +110,7 @@ function appController() {
  * @returns {undefined}
  */
 async function doAcronyms(theSplit, matchedArray, confidenceLevel) {
-    alert("Starting prediction process...\n\nWAIT FOR IT!\n\nPlease do not close this page unitl after the next alert box appears with your results.");
+    alert("Starting prediction process...\n\nWAIT FOR IT!\n\nPlease do not leave this page; wait until the next alert box appears with your results.");
     console.log("The Split = " + theSplit + "\nThe matchedArray length = " + matchedArray.length + "\nThe matchedArray's elements = " + matchedArray);
     const [xTrain, yTrain, xTest, yTest] = getAcronymData(theSplit);
 
