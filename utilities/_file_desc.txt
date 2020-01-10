@@ -12,5 +12,4 @@ README.md - README file for GitHub
 img/logo.png - NASA Langley Sherpa Logo
 css/stylesheet.css - Website stylesheet
 js/tf_engine.js - Processes the dataset
-tftest folder - Iris dataset proof of concept
 utilities folder - Utility applications to help me out
