@@ -1,5 +1,5 @@
 /**
- * Summary. Utility program to increase the size of the dataset.
+ * Summary. Utility program to increase the size of the dataset, if necessary.
  * 
  * @author Rob Garcia at rgarcia@rgprogramming.com.
  */

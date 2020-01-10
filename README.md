@@ -6,6 +6,8 @@ Try it live at  [http://acronymsfortina.rgprogramming.com/index.html](http://acr
 
 ----------
 
+> ***DISCLAIMER** - This repository and its contents are not endorsed by, sponsored by, affiliated with, nor associated with the National Aeronautics and Space Administration (NASA). This repository is only a demonstration of some of the concepts that I explored while I was an intern at NASA.*
+
 ## [](https://github.com/garciart/AcronymsForTina#overview)Overview
 
 During our internships at NASA's Langley Research Center, one of our mentors, Tina, asked us to help her out on a project: an acronym disambiguation system. She's right about the need; acronyms are a pain in the a** when you are trying to learn about something really dense in a hurry (yay, grad school!). Plus, when I was in the military, I remember the "glazed-eye look" that would appear on my friends and family's faces when I broke into an acronym-filled story. I'm worse; you break out the acronyms with me, and I fall asleep!
