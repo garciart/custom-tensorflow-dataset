@@ -29,7 +29,7 @@ function getAcronymData(testSplit) {
     return tf.tidy(() => {
         const dataByClass = [];
         const targetsByClass = [];
-        for (let i = 0; i < ACRONYM_CLASSES.length; ++i) {
+        for (const _ of ACRONYM_CLASSES) { // NOSONAR
             dataByClass.push([]);
             targetsByClass.push([]);
         }
@@ -73,7 +73,7 @@ function getAcronymData(testSplit) {
  * @param testSplit Fraction of the data at the end to split as test data: a
  *   number between 0 and 1.
  * @return A length-4 'Array', with
- *   - training data as 'tf.Tensor' of shape [numTrainExapmles, 4].
+ *   - training data as 'tf.Tensor' of shape [numTrainExamples, 4].
  *   - training one-hot labels as a 'tf.Tensor' of shape [numTrainExamples, 3]
  *   - test data as 'tf.Tensor' of shape [numTestExamples, 4].
  *   - test one-hot labels as a 'tf.Tensor' of shape [numTestExamples, 3]

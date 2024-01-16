@@ -197,7 +197,7 @@
      */
     function pluralize(word, count, inclusive) {
         var pluralized = count === 1
-                ? pluralize.singular(word) : pluralize.plural(word);
+            ? pluralize.singular(word) : pluralize.plural(word);
 
         return (inclusive ? count + ' ' : '') + pluralized;
     }
@@ -208,8 +208,8 @@
      * @type {Function}
      */
     pluralize.plural = replaceWord(
-            irregularSingles, irregularPlurals, pluralRules
-            );
+        irregularSingles, irregularPlurals, pluralRules
+    );
 
     /**
      * Check if a word is plural.
@@ -217,8 +217,8 @@
      * @type {Function}
      */
     pluralize.isPlural = checkWord(
-            irregularSingles, irregularPlurals, pluralRules
-            );
+        irregularSingles, irregularPlurals, pluralRules
+    );
 
     /**
      * Singularize a word.
@@ -226,8 +226,8 @@
      * @type {Function}
      */
     pluralize.singular = replaceWord(
-            irregularPlurals, irregularSingles, singularRules
-            );
+        irregularPlurals, irregularSingles, singularRules
+    );
 
     /**
      * Check if a word is singular.
@@ -235,8 +235,8 @@
      * @type {Function}
      */
     pluralize.isSingular = checkWord(
-            irregularPlurals, irregularSingles, singularRules
-            );
+        irregularPlurals, irregularSingles, singularRules
+    );
 
     /**
      * Add a pluralization rule to the collection.

@@ -10,24 +10,24 @@ Try it live at  [https://acronymsfortina.rgcoding.com/](https://acronymsfortina.
 
 ## Overview
 
-While I was an intern at NASA's Langley Research Center, one of our mentors, Tina, asked us to help her out on a project: an acronym disambiguation system. She's right about the need; acronyms are a pain in the a** when you are trying to learn about something really dense in a hurry (yay, grad school!). Plus, when I was in the military, I remember the "glazed-eye look" that would appear on my friends and family's faces when I broke into an acronym-filled story. I'm worse; you break out the acronyms with me, and I fall asleep!
+While I was an intern at NASA's Langley Research Center, one of our mentors, Tina, asked us to help her out on a project: an acronym disambiguation system. She's right about the need; acronyms are a pain when you are trying to learn about something really dense in a hurry (yay, grad school!). Plus, when I was in the military, I remember the "glazed-eye look" that would appear on my friends and family's faces when I broke into an acronym-filled story. I'm worse; you break out the acronyms with me, and I fall asleep!
 
 One of my fellow Sherpas, Wesley, got pretty far using IBM Watson and the Natural Language Toolkit (NLTK) Project. Here's my take on Tina's project using TensorFlow.js. In a nutshell, it replaces the Iris dataset with words that can be abbreviated using "CSS". Since this is only a proof of concept, I limited the dataset to CSS acronyms that had at least 3000 results in a regular Google search and at least one appearance in Google Scholar (another mentor, Cory, compiled a list of acronyms used by NASA, including "CSS", but I didn't keep them 😢:
 
-| Search Terms | Number of Results |
-|:---|---:|
-| "cascading style sheets" "css" | 4140000 |
-| "customer service system" "css" | 805000 |
-| central security service" "css" | 260000 |
-| "customer satisfaction survey" "css" | 140000 |
-| "combat service support" "css" | 70200 |
-| "customer self service" "css" | 54400 |
-| "content scramble system" "css" | 35000 |
-| "catalina sky survey" "css" | 32900 |
-| "continuous system simulation" | 7060 |
-| "confederate states ship" "css" | 3980 |
-| "computer subsystem" "css" | 3830 |
-| "coarse sun sensor" "css" | 3700 |
+| Search Terms                         | Number of Results |
+|:-------------------------------------|------------------:|
+| "cascading style sheets" "css"       |           4140000 |
+| "customer service system" "css"      |            805000 |
+| central security service" "css"      |            260000 |
+| "customer satisfaction survey" "css" |            140000 |
+| "combat service support" "css"       |             70200 |
+| "customer self service" "css"        |             54400 |
+| "content scramble system" "css"      |             35000 |
+| "catalina sky survey" "css"          |             32900 |
+| "continuous system simulation"       |              7060 |
+| "confederate states ship" "css"      |              3980 |
+| "computer subsystem" "css"           |              3830 |
+| "coarse sun sensor" "css"            |              3700 |
 
 ----------
 
@@ -85,7 +85,7 @@ Once again, our classes are limited to the terms listed in the table above. Look
 
 ----------
 
-"In the United States Army, the term combat service support was until 2008 defined as the essential capabilities, functions, activities, and tasks necessary to sustain all elements of operating forces in theater at all levels of war. Within the national and theater logistics systems, it includes but is not limited to that support rendered by service forces in ensuring the aspects of materiel and supply chain management, maintenance, transportation, health services, and other services required by aviation and ground combat troops to permit those units to accomplish their missions in combat. Combat service support encompasses those activities at all levels of war that produce sustainment to all operating forces on the battlefield."
+"In the United States Army, the term combat service support was until 2008 defined as the essential capabilities, functions, activities, and tasks necessary to sustain all elements of operating forces in theater at all levels of war. Within the national and theater logistics systems, it includes but is not limited to that support rendered by service forces in ensuring the aspects of material and supply chain management, maintenance, transportation, health services, and other services required by aviation and ground combat troops to permit those units to accomplish their missions in combat. Combat service support encompasses those activities at all levels of war that produce sustainment to all operating forces on the battlefield."
 
 ### Prediction:  Combat Service Support
 
